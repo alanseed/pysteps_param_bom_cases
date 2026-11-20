@@ -54,6 +54,12 @@ whole year. Timestamp-gap reports currently use filenames. No temporal resamplin
 or spatial aggregation is performed.
 
 
+## Development environment
+
+Use the dedicated `bom_cases` Conda environment and an editable installation of
+the local pysteps_param checkout. See [environment setup](docs/environment.md)
+for creation, installation and dependency policy.
+
 ## Validation
 
 ```bash
