@@ -1,12 +1,15 @@
+affine @ file:///home/conda/feedstock_root/build_artifacts/affine_1788134199255/work
 attrs @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_attrs_1773935801/work
 Bottleneck @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_bottleneck_h32d774f_1794565962/work
 branca @ file:///home/conda/feedstock_root/build_artifacts/branca_1759755605562/work
 cached-property @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_cached_property_1787678456/work
 Cartopy @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_cartopy_1789829342/work
-certifi @ file:///home/conda/feedstock_root/build_artifacts/certifi_1793720052803/work/certifi
+certifi @ file:///home/conda/feedstock_root/build_artifacts/certifi_1795250546817/work/certifi
 cftime @ file:///home/conda/feedstock_root/build_artifacts/cftime_1789119958038/work
 charset-normalizer @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_charset-normalizer_1790766086/work
 click @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_click_h5ded981_1794046236/work
+click-plugins @ file:///home/conda/feedstock_root/build_artifacts/click-plugins_1750848229740/work
+cligj @ file:///home/conda/feedstock_root/build_artifacts/cligj_1733749956636/work
 cloudpickle @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_cloudpickle_1765303462/work
 colorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1733218098505/work
 contourpy @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_contourpy_h9be0db6_1794831517/work
@@ -62,6 +65,7 @@ python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-
 python-dotenv @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_python-dotenv_1790859080/work
 pytz @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_pytz_h5ded981_1793296577/work
 PyYAML @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_pyyaml_h7575043_1793655133/work
+rasterio @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_rasterio_1791259613/work
 referencing @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_referencing_1760379115/work
 requests @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_requests_1778851103/work
 rpds-py @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_rpds-py_1791202435/work
@@ -72,6 +76,7 @@ setuptools==84.2.1
 setuptools-scm @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_setuptools-scm_1790257649/work
 shapely @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_shapely_1791474319/work
 shiboken6==6.12.0
+snuggs @ file:///home/conda/feedstock_root/build_artifacts/snuggs_1733818638588/work
 statsmodels @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_statsmodels_1790033599/work
 threadpoolctl @ file:///home/conda/feedstock_root/build_artifacts/threadpoolctl_1794306916735/work
 tomli @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_tomli_1791394576/work

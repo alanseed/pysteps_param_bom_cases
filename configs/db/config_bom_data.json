@@ -40,49 +40,6 @@
                 "tzero": 420,
                 "ar_order": 2
             }
-        },
-        {
-            "kind": "stochastic_event",
-            "name": "stochastic_event_v1",
-            "domain": "syd_1km",
-            "output_product": "synthetic_qpe",
-            "description": "Synthetic rain event with a static latent apparent-motion field",
-            "generator": {
-                "schema_version": 1,
-                "timestep": 300,
-                "output_timesteps": 75,
-                "parent_domain": {
-                    "n_rows": 1000,
-                    "n_cols": 1000,
-                    "crop": "center"
-                },
-                "rainfield": {
-                    "transform": "dbr",
-                    "rain_threshold": 1.0,
-                    "cascade_name": "standard",
-                    "stochastic_generator": "inverse_calibrated_v2",
-                    "ar_order": 2,
-                    "alpha": 2.72,
-                    "ht": 0.81,
-                    "lzero": 256,
-                    "tzero": 420,
-                    "synthetic_corl_zero_bounds_minutes": {
-                        "minimum": 60,
-                        "maximum": 1500,
-                        "basis": "The maximum is the rounded, 1000-km scale equivalent of the equal-storm p90 event-median corl_zero from 241 psteps_param storms."
-                    },
-                    "burn_in_timesteps": 24
-                },
-                "advection": {
-                    "marginal_distribution": "normal",
-                    "spatial_spectrum": "single_power_law",
-                    "shared_component_exponent": true,
-                    "component_dependence": "independent",
-                    "isotropy": "isotropic",
-                    "high_frequency_policy": "extrapolate_to_grid_nyquist",
-                    "temporal_evolution": "fixed"
-                }
-            }
         }
     ],
     "storms": [
@@ -100,19 +57,24 @@
         {
             "kind": "domain",
             "name": "syd_1km",
-            "n_rows": 300,
-            "n_cols": 300,
+            "n_rows": 250,
+            "n_cols": 250,
             "p_size": 1000.0,
-            "start_x": 1604500.0,
-            "start_y": 5831500.0,
+            "start_x": -124500.0,
+            "start_y": -124500.0,
             "projection": {
-                "epsg": "EPSG:2193",
-                "name": "transverse_mercator",
-                "central_meridian": 173.0,
-                "latitude_of_origin": 0.0,
-                "scale_factor": 0.9996,
-                "false_easting": 1600000.0,
-                "false_northing": 10000000.0
+                "epsg": "PROJCRS[\"undefined\",BASEGEOGCRS[\"undefined\",DATUM[\"undefined\",ELLIPSOID[\"undefined\",6378137,298.257222096042,LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Albers Equal Area\",ID[\"EPSG\",9822]],PARAMETER[\"Latitude of false origin\",-33.7008,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8821]],PARAMETER[\"Longitude of false origin\",151.2094,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8822]],PARAMETER[\"Latitude of 1st standard parallel\",-32.2,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8823]],PARAMETER[\"Latitude of 2nd standard parallel\",-35.2,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8824]],PARAMETER[\"Easting at false origin\",0,LENGTHUNIT[\"Metre\",1],ID[\"EPSG\",8826]],PARAMETER[\"Northing at false origin\",0,LENGTHUNIT[\"Metre\",1],ID[\"EPSG\",8827]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]",
+                "name": "albers_conical_equal_area",
+                "standard_parallel": [
+                    -32.2,
+                    -35.2
+                ],
+                "longitude_of_central_meridian": 151.2094,
+                "latitude_of_projection_origin": -33.7008,
+                "false_easting": 0.0,
+                "false_northing": 0.0,
+                "semi_major_axis": 6378137.0,
+                "semi_minor_axis": 6356752.31414
             }
         }
     ],

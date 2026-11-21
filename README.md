@@ -12,7 +12,7 @@ Scientific experiment definitions and paper outputs belong in the separate
 - `configs/` — source, domain and product configuration (add as implemented).
 - `run/` — repeatable archive runners (add as implemented).
 - `docs/` — source formats, licences and processing contracts.
-- `src/pysteps_param_bom_cases/` — future reusable Bureau adapters, added when needed.
+- `src/pysteps_param_bom_cases/` — Bureau source decoding, remapping and ingestion.
 
 Bulk data live outside Git at `~/data/alan/psteps_advect_data/`:
 
@@ -66,8 +66,33 @@ for creation, installation and dependency policy.
 python3 -m unittest discover -s tests -v
 ```
 
-See [Rainfields3 source documentation](docs/rainfields3.md). Database ingestion,
-regridding and archive runners are not implemented yet. Reuse suitable shared
-components from pysteps_param and its operations package after validating their
-contracts against Bureau data; the WRNZ QPE reader assumes rainfall depth and
-must not be used unchanged for these rain-rate files.
+See [Rainfields3 source documentation](docs/rainfields3.md) and the
+[date-range ingestion workflow](docs/ingestion.md). The Bureau reader uses
+Rasterio/GDAL remapping and the core storage API; the WRNZ accumulation reader
+is not used for these calibrated rain-rate files.
+
+## Sydney analysis grid
+
+The configured `syd_1km` domain is a centred 250 × 250 grid at 1 km in the
+native Terry Hills Albers projection. See [domain geometry and archive CRS
+variation](docs/syd_1km_domain.md) before implementing ingestion.
+
+## Configuration scope
+
+[Database configuration](configs/db/config_bom_data.json) and the draft
+[synthetic-event configuration](configs/experiments/config_synthetic_event.json)
+are separate. See [configuration scope and scientific sequence](docs/configuration_scope.md)
+for loader compatibility and the planned progression from Sydney ingestion to
+LK-vector analysis and synthetic tracking validation.
+
+## Ingest an archive interval
+
+```bash
+conda activate bom_cases
+python -m pip install --no-deps --no-build-isolation -e .
+bom-ingest-rainfields 2025-01-01 2025-01-01 --dry-run
+```
+
+Remove `--dry-run` to write to the configured local `BOM` database. Read the
+[ingestion policies and restart instructions](docs/ingestion.md) before running
+a full interval.

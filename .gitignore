@@ -6,3 +6,6 @@ __pycache__/
 *.nc
 *.zip
 *.part
+*.egg-info/
+.pytest_cache/
+build/

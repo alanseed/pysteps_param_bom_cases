@@ -1,0 +1,47 @@
+{
+    "models": [
+        {
+            "kind": "stochastic_event",
+            "name": "stochastic_event_v1",
+            "domain": "syd_1km",
+            "output_product": "synthetic_qpe",
+            "description": "Synthetic rain event with a static latent apparent-motion field",
+            "generator": {
+                "schema_version": 1,
+                "timestep": 300,
+                "output_timesteps": 75,
+                "parent_domain": {
+                    "n_rows": 1000,
+                    "n_cols": 1000,
+                    "crop": "center"
+                },
+                "rainfield": {
+                    "transform": "dbr",
+                    "rain_threshold": 1.0,
+                    "cascade_name": "standard",
+                    "stochastic_generator": "inverse_calibrated_v2",
+                    "ar_order": 2,
+                    "alpha": 2.72,
+                    "ht": 0.81,
+                    "lzero": 256,
+                    "tzero": 420,
+                    "synthetic_corl_zero_bounds_minutes": {
+                        "minimum": 60,
+                        "maximum": 1500,
+                        "basis": "The maximum is the rounded, 1000-km scale equivalent of the equal-storm p90 event-median corl_zero from 241 psteps_param storms."
+                    },
+                    "burn_in_timesteps": 24
+                },
+                "advection": {
+                    "marginal_distribution": "normal",
+                    "spatial_spectrum": "single_power_law",
+                    "shared_component_exponent": true,
+                    "component_dependence": "independent",
+                    "isotropy": "isotropic",
+                    "high_frequency_policy": "extrapolate_to_grid_nyquist",
+                    "temporal_evolution": "fixed"
+                }
+            }
+        }
+    ]
+}
