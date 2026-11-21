@@ -1,0 +1,132 @@
+{
+    "inputs": [
+        {
+            "domain": "syd_1km",
+            "product": "qpe",
+            "description": "Radar rain rate",
+            "timestep": 300,
+            "transform": "dbr",
+            "rain_threshold": 1.0,
+            "kind": "analysis"
+        }
+    ],
+    "cascades": [
+        {
+            "name": "standard",
+            "n_cascade_levels": 7,
+            "scale_break_km": 15
+        }
+    ],
+    "models": [
+        {
+            "kind": "steps_nowcast",
+            "domain": "syd_1km",
+            "output_product": "nowcast",
+            "description": "Radar only ensemble nowcast v2.0",
+            "steps": {
+                "latent_distribution": {
+                    "family": "normal",
+                    "lower_limit_dbr": 1.25
+                },
+                "timestep": 300,
+                "issue_interval_minutes": 5,
+                "cascade_name": "standard",
+                "n_forecasts": 24,
+                "n_ensembles": 30,
+                "input_analysis": "qpe",
+                "alpha": 2.72,
+                "ht": 0.81,
+                "lzero": 256,
+                "tzero": 420,
+                "ar_order": 2
+            }
+        },
+        {
+            "kind": "stochastic_event",
+            "name": "stochastic_event_v1",
+            "domain": "syd_1km",
+            "output_product": "synthetic_qpe",
+            "description": "Synthetic rain event with a static latent apparent-motion field",
+            "generator": {
+                "schema_version": 1,
+                "timestep": 300,
+                "output_timesteps": 75,
+                "parent_domain": {
+                    "n_rows": 1000,
+                    "n_cols": 1000,
+                    "crop": "center"
+                },
+                "rainfield": {
+                    "transform": "dbr",
+                    "rain_threshold": 1.0,
+                    "cascade_name": "standard",
+                    "stochastic_generator": "inverse_calibrated_v2",
+                    "ar_order": 2,
+                    "alpha": 2.72,
+                    "ht": 0.81,
+                    "lzero": 256,
+                    "tzero": 420,
+                    "synthetic_corl_zero_bounds_minutes": {
+                        "minimum": 60,
+                        "maximum": 1500,
+                        "basis": "The maximum is the rounded, 1000-km scale equivalent of the equal-storm p90 event-median corl_zero from 241 psteps_param storms."
+                    },
+                    "burn_in_timesteps": 24
+                },
+                "advection": {
+                    "marginal_distribution": "normal",
+                    "spatial_spectrum": "single_power_law",
+                    "shared_component_exponent": true,
+                    "component_dependence": "independent",
+                    "isotropy": "isotropic",
+                    "high_frequency_policy": "extrapolate_to_grid_nyquist",
+                    "temporal_evolution": "fixed"
+                }
+            }
+        }
+    ],
+    "storms": [
+        {
+            "kind": "storms",
+            "name": "syd_1km_qpe_standard_v1",
+            "domain": "syd_1km",
+            "product": "qpe",
+            "min_war": 0.025,
+            "min_duration_hours": 6,
+            "max_gap_minutes": 30
+        }
+    ],
+    "domains": [
+        {
+            "kind": "domain",
+            "name": "syd_1km",
+            "n_rows": 300,
+            "n_cols": 300,
+            "p_size": 1000.0,
+            "start_x": 1604500.0,
+            "start_y": 5831500.0,
+            "projection": {
+                "epsg": "EPSG:2193",
+                "name": "transverse_mercator",
+                "central_meridian": 173.0,
+                "latitude_of_origin": 0.0,
+                "scale_factor": 0.9996,
+                "false_easting": 1600000.0,
+                "false_northing": 10000000.0
+            }
+        }
+    ],
+    "rainfield_storage_policies": [
+        {
+            "kind": "rainfield_storage_policy",
+            "name": "negligible_rain_v1",
+            "version": 1,
+            "default": true,
+            "rain_threshold_mmph": 0.1,
+            "minimum_fraction": 0.01,
+            "comparison": "greater_than",
+            "denominator": "entire_domain",
+            "classification_stage": "after_regridding_before_encoding"
+        }
+    ]
+}
