@@ -10,8 +10,9 @@ creates a forecast product when loaded by the core configuration loader.
 The local `BOM` database was initialised and this configuration loaded on
 22 November 2026. Read-back verification confirmed seven configuration documents:
 two products, one STEPS model, one domain, one cascade, one storm definition
-and one storage policy. No rainfall has been ingested yet. The synthetic model
-was not loaded. A configuration hash and verification record are retained under
+and one storage policy. The synthetic model was not loaded. Ingestion has since
+completed; see the [2025 acceptance and storm record](2025_ingestion_and_storms.md).
+A configuration hash and verification record are retained under
 the external data root at `manifests/database_setup/BOM_configuration.json`.
 The loader is append-oriented: inspect existing configuration before loading
 it again.
@@ -31,6 +32,11 @@ STEPS model definitions, not this generator schema. No synthetic-event runner
 has been added by this change.
 
 ## Intended scientific sequence
+
+The agreed [storm-based characterisation strategy](storm_characterisation_strategy.md)
+expands this sequence: freeze the post-ingestion storm population, process all
+qualifying events with fixed LK settings and non-Lagrangian field parameters,
+then select representative environments for synthetic tracking trials.
 
 1. Ingest the observed Sydney rain-rate data onto the agreed analysis grid,
    preserving missingness, actual observation times and processing provenance.

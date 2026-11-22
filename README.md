@@ -85,6 +85,21 @@ are separate. See [configuration scope and scientific sequence](docs/configurati
 for loader compatibility and the planned progression from Sydney ingestion to
 LK-vector analysis and synthetic tracking validation.
 
+The [advection reuse and gap inventory](docs/advection_reuse_inventory.md)
+identifies existing code, database records and validation archives to reuse,
+with LK input parameters fixed and parameter optimisation out of scope.
+The agreed [storm-based research strategy](docs/storm_characterisation_strategy.md)
+describes full-population event processing, representative case selection and
+the progression to synthetic trials with known truth.
+The [event-based LK extraction plan](docs/event_lk_extraction_plan.md) details
+the proposed processing of the frozen 107-storm population.
+See [LK runner usage](docs/event_lk_usage.md) for the implemented extraction
+command, research records, units and restart behaviour.
+The [field-parameter stage](docs/field_parameters.md) estimates missing-aware
+rainfall marginals and spatial spectra over the same event population. See
+the [full-run acceptance record](docs/2025_lk_and_field_parameters.md) for
+verified production outcomes.
+
 ## Ingest an archive interval
 
 ```bash

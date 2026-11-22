@@ -1,0 +1,38 @@
+{
+  "selection": "Previous-input rain coverage nearest 10% and 60% among pilot vector pairs; illustrative only",
+  "style": "psteps-rain-view shared colormap, boundaries, projection and 12x8 layout",
+  "figures": [
+    {
+      "figure": "/home/alanseed/alan/pysteps_param_bom_cases/figs/pilot_1000_v1_lk_20250731T163500Z.png",
+      "run_id": "pilot_1000_v1",
+      "storm_id": "6b02748b146d6af5e47fae49",
+      "pair_valid_time": "2025-07-31 16:35:00",
+      "previous_source_time": "2025-07-31 16:30:00+00:00",
+      "current_source_time": "2025-07-31 16:35:00+00:00",
+      "rain_coverage": 0.099952,
+      "counts": {
+        "detected": 146,
+        "tracked": 146,
+        "accepted": 140,
+        "rejected_outlier": 6
+      },
+      "payload_sha256": "890ced968b2a2b2949bb060462c193b30cb3c8f99723e2a17f9fbcd4d59efc88"
+    },
+    {
+      "figure": "/home/alanseed/alan/pysteps_param_bom_cases/figs/pilot_1000_v1_lk_20250802T075000Z.png",
+      "run_id": "pilot_1000_v1",
+      "storm_id": "6b02748b146d6af5e47fae49",
+      "pair_valid_time": "2025-08-02 07:50:00",
+      "previous_source_time": "2025-08-02 07:45:00+00:00",
+      "current_source_time": "2025-08-02 07:50:00+00:00",
+      "rain_coverage": 0.506128,
+      "counts": {
+        "detected": 428,
+        "tracked": 428,
+        "accepted": 423,
+        "rejected_outlier": 5
+      },
+      "payload_sha256": "b90f07c5b07bbbe4f6d2b2404b48fc9807bef36225ff3c973d8bd2d5a366867b"
+    }
+  ]
+}
