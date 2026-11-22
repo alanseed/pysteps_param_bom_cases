@@ -205,3 +205,17 @@ def test_bad_data_root_fails_before_database_access(tmp_path,monkeypatch):
     with pytest.raises(SystemExit) as error:
         main(['2025-01-01','2025-01-01','--data-root',str(tmp_path)])
     assert error.value.code==2
+
+
+def test_source_crs_cache_keys_include_all_projection_attributes():
+    from pysteps_param_bom_cases.ingest import _crs_from_cf, parse_source_crs, target_crs
+    _crs_from_cf.cache_clear()
+    first=parse_source_crs(CRS_ATTRS)
+    repeat=parse_source_crs({**CRS_ATTRS,'standard_parallel':np.array([-32.2,-35.2])})
+    assert repeat is first
+    changed=parse_source_crs({**CRS_ATTRS,'longitude_of_central_meridian':151.209})
+    assert not changed.equals(first)
+    assert _crs_from_cf.cache_info().hits==1
+    assert _crs_from_cf.cache_info().misses==2
+    target_crs.cache_clear()
+    assert target_crs(first.to_wkt()) is target_crs(first.to_wkt())

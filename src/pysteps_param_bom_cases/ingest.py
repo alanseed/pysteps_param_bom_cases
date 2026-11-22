@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 from collections import Counter, defaultdict
 from datetime import date, datetime, timedelta, timezone
+from functools import lru_cache
 import hashlib
 from importlib.metadata import version
 import json
@@ -25,6 +26,24 @@ import xarray as xr
 UTC = timezone.utc
 LOG = logging.getLogger(__name__)
 DEFAULT_ROOT = Path('~/data/alan/psteps_advect_data').expanduser()
+
+
+@lru_cache(maxsize=32)
+def _crs_from_cf(serialised_attributes):
+    """Cache complete CF definitions; projection changes get distinct entries."""
+    return CRS.from_cf(json.loads(serialised_attributes))
+
+
+def parse_source_crs(attributes):
+    serialised = json.dumps(attributes, sort_keys=True,
+                            default=lambda value: np.asarray(value).tolist())
+    return _crs_from_cf(serialised)
+
+
+@lru_cache(maxsize=32)
+def target_crs(definition):
+    """Parse the configured target once per distinct CRS definition."""
+    return CRS.from_user_input(definition)
 
 
 def sha256(path: Path) -> str:
@@ -131,7 +150,7 @@ def read_native(path: Path, radar: int):
         if grid_mapping not in ds:
             raise ValueError('Missing CF grid mapping')
         attrs = dict(ds[grid_mapping].attrs)
-        crs = CRS.from_cf(attrs)
+        crs = parse_source_crs(attrs)
         if not crs.is_projected:
             raise ValueError('Rainfields3 source must use a projected CRS')
         x, dx = _axis_metres(ds.x)
@@ -166,7 +185,7 @@ def accepted_source_crs(source_crs: CRS, attrs: dict, target: CRS):
     normalised = False
     effective = source_crs
     if attrs.get('grid_mapping_name') == 'albers_conical_equal_area' and attrs.get('longitude_of_central_meridian') == 151.209:
-        candidate = CRS.from_cf({**attrs, 'longitude_of_central_meridian': 151.2094})
+        candidate = parse_source_crs({**attrs, 'longitude_of_central_meridian': 151.2094})
         if candidate.equals(target):
             effective, normalised = target, True
     return effective, normalised
@@ -180,7 +199,7 @@ def remap(values, transform, source_crs, domain):
     contribution invalidates the destination. A separate coverage band rejects
     target cells not completely inside the source footprint.
     """
-    target = CRS.from_user_input(domain['projection']['epsg'])
+    target = target_crs(domain['projection']['epsg'])
     step = float(domain['p_size'])
     nr, nc = int(domain['n_rows']), int(domain['n_cols'])
     if step <= 0 or min(nr, nc) < 2:
@@ -219,7 +238,7 @@ def prepare(candidate, domain, radar):
     values, transform, original_crs, attrs, actual, checksum = read_native(path, radar)
     if actual.isoformat() != candidate['source_time']:
         raise ValueError('Selected source time changed')
-    effective, normalised = accepted_source_crs(original_crs, attrs, CRS.from_user_input(domain['projection']['epsg']))
+    effective, normalised = accepted_source_crs(original_crs, attrs, target_crs(domain['projection']['epsg']))
     field = remap(values, transform, effective, domain)
     validate_packing(field.values)
     provenance = {'path':str(path), 'sha256':checksum, 'source_valid_time':actual.isoformat(),

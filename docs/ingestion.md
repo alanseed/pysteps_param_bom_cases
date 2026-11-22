@@ -136,3 +136,34 @@ was checked and remained empty after validation.
 Detailed validation reports are under the external data root at
 `runs/ingestion_validation/`. These development checks establish ingestion
 behaviour; they are not independent tracking validation for the scientific paper.
+
+## CRS metadata caching and continuation
+
+The reader caches complete CF CRS definitions and configured target definitions
+in bounded process-local caches. The core NetCDF reader also caches conversion
+from CF metadata to the existing projection representation, including expensive
+negative EPSG searches for custom CRSs. Every source still undergoes checksum,
+coordinate, mask and time validation. Rainfall arrays and masks are not cached.
+
+The 22 November 2026 cache upgrade passed 20 Bureau tests and 23 focused core
+tests. A 12-field comparison across both CRS variants produced identical
+unpacked/decoded values, masks, times, attributes, source provenance and policy
+decisions. The read/remap/encode/decode benchmark took 9.22 seconds before
+caching, 1.19 seconds with cold caches and 0.39 seconds with warm caches. These
+are pipeline measurements rather than full database-throughput estimates.
+
+The original year-long ingestion was interrupted after its last complete daily
+report, 17 March. Continuation began on 18 March with `--replace`, reprocessing
+the incomplete day and preserving all completed days. This uses the existing
+date-range and replacement options; no legacy-signature compatibility mechanism
+was introduced. Old and new run manifests retain their own implementation
+fingerprints, with equivalence evidence and continuation links under the external
+data root at `runs/ingestion/cache_upgrade_20261122T040047Z/`.
+
+The first two production continuation days (18–19 March) completed without
+failures in approximately 11 and 10 seconds, versus the original run's roughly
+226 seconds per day. All 576 expected catalogue entries for those two days were
+verified with the new signature. This is early production throughput, not a
+full-year completion estimate. Daily-memory batching was deferred because the
+metadata-cache change removed the dominant repeated work without increasing
+array memory requirements.
