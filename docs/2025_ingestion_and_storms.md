@@ -1,7 +1,7 @@
 # 2025 ingestion acceptance and published storm population
 
 Reviewed and generated on 22 November 2026, following the accepted
-[storm characterisation strategy](storm_characterisation_strategy.md).
+[storm characterisation strategy](../../psteps_advect_paper/docs/storm_characterisation_strategy.md).
 
 ## Ingestion review
 

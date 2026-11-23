@@ -1,7 +1,7 @@
 # Event-based LK extraction implementation plan
 
 Proposed on 22 November 2026, following the accepted
-[storm characterisation strategy](storm_characterisation_strategy.md) and
+[storm characterisation strategy](../../psteps_advect_paper/docs/storm_characterisation_strategy.md) and
 [verified 2025 storm publication](2025_ingestion_and_storms.md).
 The runner is now implemented; see [usage and verification](event_lk_usage.md).
 Pilot and production runs use the research database. The full-population
@@ -12,7 +12,7 @@ production run has since completed; see the
 
 Process all 107 storms in `BOM`, definition `syd_1km_qpe_standard_v1`, frozen
 generation `2417c6c4be66438caac46c416efe770a`. Keep LK settings fixed to the
-resolved baseline in the [reuse inventory](advection_reuse_inventory.md), with
+resolved baseline in the [reuse inventory](../../psteps_advect_paper/docs/advection_reuse_inventory.md), with
 the adopted Bureau `max_corners=1000` override. All other settings are unchanged.
 Extract sparse tracks before declustering or dense interpolation. Do not run
 an LK parameter sweep, hybrid classifier, dense reconstruction or statistical

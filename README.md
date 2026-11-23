@@ -1,7 +1,7 @@
 # Bureau radar cases for pysteps_param
 
 Acquisition and processing workflows for Bureau of Meteorology radar data, with
-archive ingestion into a pysteps_param database planned as a subsequent step.
+archive ingestion, event-based LK extraction and field-parameter processing.
 Scientific experiment definitions and paper outputs belong in the separate
 [psteps_advect_paper repository](https://github.com/alanseed/psteps_advect_paper).
 
@@ -80,25 +80,20 @@ variation](docs/syd_1km_domain.md) before implementing ingestion.
 ## Configuration scope
 
 [Database configuration](configs/db/config_bom_data.json) and the draft
-[synthetic-event configuration](configs/experiments/config_synthetic_event.json)
+[synthetic-event configuration](../psteps_advect_paper/configs/experiments/config_synthetic_event.json)
 are separate. See [configuration scope and scientific sequence](docs/configuration_scope.md)
 for loader compatibility and the planned progression from Sydney ingestion to
 LK-vector analysis and synthetic tracking validation.
 
-The [advection reuse and gap inventory](docs/advection_reuse_inventory.md)
-identifies existing code, database records and validation archives to reuse,
-with LK input parameters fixed and parameter optimisation out of scope.
-The agreed [storm-based research strategy](docs/storm_characterisation_strategy.md)
-describes full-population event processing, representative case selection and
-the progression to synthetic trials with known truth.
-The [event-based LK extraction plan](docs/event_lk_extraction_plan.md) details
-the proposed processing of the frozen 107-storm population.
-See [LK runner usage](docs/event_lk_usage.md) for the implemented extraction
-command, research records, units and restart behaviour.
-The [field-parameter stage](docs/field_parameters.md) estimates missing-aware
-rainfall marginals and spatial spectra over the same event population. See
-the [full-run acceptance record](docs/2025_lk_and_field_parameters.md) for
-verified production outcomes.
+Archive processing is described in [LK runner usage](docs/event_lk_usage.md)
+and [field-parameter processing](docs/field_parameters.md). See the
+[2025 acceptance record](docs/2025_lk_and_field_parameters.md) for completed
+archive products. Operational input/track QA remains in `figs/pilot*`.
+
+Scientific analysis, synthetic configurations, methods and publication figures
+now belong to [the paper repository](../psteps_advect_paper/README.md).
+See the [migration record](docs/repository_migration.md) for the ownership
+boundary and provenance/replay policy.
 
 ## Ingest an archive interval
 

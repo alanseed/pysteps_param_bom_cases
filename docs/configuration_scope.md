@@ -19,21 +19,20 @@ it again.
 
 ## Synthetic-event configuration
 
-[config_synthetic_event.json](../configs/experiments/config_synthetic_event.json)
+[config_synthetic_event.json](../../psteps_advect_paper/configs/experiments/config_synthetic_event.json)
 preserves the original `stochastic_event_v1` model and every generator parameter.
 It retains `kind: stochastic_event` and a `models` list; the file name identifies
 its experimental purpose without changing the model's existing identity.
 It references the `syd_1km` domain and `standard` cascade defined by the database
 configuration, rather than duplicating their definitions.
 
-This is a draft experiment specification for a future synthetic-event runner.
+The paper repository now owns this experiment specification and its runner.
 Do not pass it to `psteps-load-config`: the installed loader currently accepts
-STEPS model definitions, not this generator schema. No synthetic-event runner
-has been added by this change.
+STEPS model definitions, not this generator schema. Use the paper documentation for explicit generator/configuration inputs.
 
 ## Intended scientific sequence
 
-The agreed [storm-based characterisation strategy](storm_characterisation_strategy.md)
+The agreed [storm-based characterisation strategy](../../psteps_advect_paper/docs/storm_characterisation_strategy.md)
 expands this sequence: freeze the post-ingestion storm population, process all
 qualifying events with fixed LK settings and non-Lagrangian field parameters,
 then select representative environments for synthetic tracking trials.
