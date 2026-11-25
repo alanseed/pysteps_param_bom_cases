@@ -6,6 +6,7 @@
             "description": "Radar rain rate",
             "timestep": 300,
             "transform": "dbr",
+            "optical_flow_method": "dense_lucaskanade_1000_v1",
             "rain_threshold": 1.0,
             "kind": "analysis"
         }

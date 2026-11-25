@@ -106,3 +106,9 @@ bom-ingest-rainfields 2025-01-01 2025-01-01 --dry-run
 Remove `--dry-run` to write to the configured local `BOM` database. Read the
 [ingestion policies and restart instructions](docs/ingestion.md) before running
 a full interval.
+
+## Native event archive products
+
+See [event archive processing](docs/event_archive_processing.md) for generation
+of dense motion, seven-level cascades and full forecast parameters for the
+107 Sydney events, including source provenance, missingness and restart checks.

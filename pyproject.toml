@@ -10,6 +10,7 @@ requires-python = ">=3.12,<3.13"
 dependencies = ["pysteps-param", "numpy", "scipy", "pymongo>=4", "xarray", "netCDF4", "pyproj", "rasterio>=1.3"]
 
 [project.scripts]
+bom-prepare-event-archive = "pysteps_param_bom_cases.archive_events:main"
 bom-ingest-rainfields = "pysteps_param_bom_cases.ingest:main"
 bom-extract-event-lk = "pysteps_param_bom_cases.event_lk:main"
 bom-event-field-parameters = "pysteps_param_bom_cases.field_parameters:main"
